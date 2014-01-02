@@ -48,11 +48,14 @@ def question_yesno(request, question):
     }
 
 @question_proc('open', 'open-textfield')
-def question_open(request, question):
+def question_open(request, question, qvalues=None):
     key = "question_%s" % question.number
     value = question.getcheckdict().get('default','')
     if key in request.POST:
         value = request.POST[key]
+    elif qvalues and key in qvalues:
+        value = qvalues[key]
+
     return {
         'required' : question.getcheckdict().get('required', False),
         'value' : value,

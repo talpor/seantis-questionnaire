@@ -461,8 +461,9 @@ def show_questionnaire(request, runinfo, errors={}):
     jstriggers = []
     qvalues = {}
 
-    # initialize qvalues        
-    cookiedict = runinfo.get_cookiedict()                                                                                                                       
+    # initialize qvalues
+    cookiedict = runinfo.get_cookiedict()
+
     for k,v in cookiedict.items():
         qvalues[k] = v
 
@@ -502,7 +503,7 @@ def show_questionnaire(request, runinfo, errors={}):
         if 'default' in cd and not question.number in cookiedict:
             qvalues[question.number] = cd['default']
         if Type in QuestionProcessors:
-            qdict.update(QuestionProcessors[Type](request, question))
+            qdict.update(QuestionProcessors[Type](request, question, qvalues))
             if 'jsinclude' in qdict:
                 if qdict['jsinclude'] not in jsinclude:
                     jsinclude.extend(qdict['jsinclude'])
