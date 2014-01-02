@@ -571,7 +571,7 @@ def substitute_answer(qvalues, obj):
 
     """
         
-    if qvalues:
+    if qvalues and obj.text:
         magic = 'subst_with_ans_'
         regex =r'subst_with_ans_(\S+)'
 
