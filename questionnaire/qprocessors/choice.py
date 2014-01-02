@@ -13,8 +13,8 @@ def question_choice(request, question, qvalues=None):
     val = None
     if key in request.POST:
         val = request.POST[key]
-    elif qvalues and key in qvalues:
-        val = qvalues[key]
+    elif qvalues and question.number in qvalues:
+        val = qvalues[question.number][2:-2]
     else:
         if 'default' in cd:
             val = cd['default']

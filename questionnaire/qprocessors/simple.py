@@ -51,10 +51,11 @@ def question_yesno(request, question):
 def question_open(request, question, qvalues=None):
     key = "question_%s" % question.number
     value = question.getcheckdict().get('default','')
+
     if key in request.POST:
         value = request.POST[key]
-    elif qvalues and key in qvalues:
-        value = qvalues[key]
+    elif qvalues and question.number in qvalues:
+        value = qvalues[question.number][2:-2]
 
     return {
         'required' : question.getcheckdict().get('required', False),
